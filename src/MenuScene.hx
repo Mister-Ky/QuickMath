@@ -3,8 +3,6 @@ class MenuScene extends Scene {
     var curve : Curve;
 
     var title : h2d.Text;
-    var start : h2d.Flow;
-    var exit : h2d.Flow;
 
     #if debug
     var curve_debug : CurveDebugger;
@@ -23,8 +21,10 @@ class MenuScene extends Scene {
         var buttons = new h2d.Flow(this);
         buttons.layout = h2d.Flow.FlowLayout.Vertical;
         buttons.verticalSpacing = 12;
-        start = Main.instance.addButton(buttons, "Start", () -> SceneManager.changeScene(new GameScene()));
-        exit = Main.instance.addButton(buttons, "Exit", () -> Sys.exit(0));
+        Main.instance.addButton(buttons, "Start", () -> SceneManager.changeScene(new GameScene()));
+        #if hl
+        Main.instance.addButton(buttons, "Exit", () -> Sys.exit(0));
+        #end
         var maxWidth = 0;
         for (b in buttons.children) {
             var flow = Std.downcast(b, h2d.Flow);

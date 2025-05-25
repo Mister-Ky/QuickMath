@@ -5,9 +5,10 @@ class GameScene extends Scene {
     var shownNumbers : Int = 0;
     var time = 0.;
     var stop = false;
+
     var preGameCountdown = 3;
-    var readyText : h2d.Text;
-    var countdownText : h2d.Text;
+    var readyText : msdf.OutlinedText;
+    var countdownText : msdf.OutlinedText;
 
     var number : h2d.Text;
     var timerBar : TimerBar;
@@ -17,17 +18,25 @@ class GameScene extends Scene {
         trace("----------------------------------------"); //40
         #end
 
-        readyText = Main.instance.addText(this, "Ready");
-        readyText.scale(2);
+        readyText = Main.instance.addOutlinedText(this, "Ready");
+        readyText.scale(2.5);
         readyText.textColor = 0x114E0D;
         readyText.x = (Main.instance.baseWindowSize.x - readyText.textWidth * readyText.scaleX) / 2;
         readyText.y = (Main.instance.baseWindowSize.y - readyText.textHeight * readyText.scaleY) / 8;
-        countdownText = Main.instance.addText(this);
+        countdownText = Main.instance.addOutlinedText(this);
         countdownText.scale(10);
         countdownText.textColor = 0x0131FF;
         countdownText.text = Std.string(preGameCountdown);
         countdownText.x = (Main.instance.baseWindowSize.x - countdownText.textWidth * countdownText.scaleX) / 2;
         countdownText.y = (Main.instance.baseWindowSize.y - countdownText.textHeight * countdownText.scaleY) / 2;
+        for (tf in [readyText, countdownText]) {
+            tf.outlineColor = 0xFFFFFF;
+            tf.thickness = 0.5;
+            tf.smoothness = 0;
+            tf.outline = true;
+            tf.outlineThickness = 0.55;
+            tf.outlineSmoothness = 0;
+        }
 
         number = Main.instance.addText(this);
         number.scale(10);
@@ -39,8 +48,8 @@ class GameScene extends Scene {
             SceneManager.changeScene(new MenuScene());
         }
 
+        time += dt;
         if (countdownText != null) {
-            time += dt;
             if (time >= 1.) {
                 time = 0.;
                 preGameCountdown--;
@@ -59,17 +68,22 @@ class GameScene extends Scene {
             return;
         }
 
-        time += dt;
-        if (time >= Settings.numberDisplayTime && !stop) {
-            time = 0.;
-            if (shownNumbers == Settings.displayedNumberCount) {
-                stop = true;
-                number.text = "";
-                timerBar = new TimerBar(this, 800, 50, Settings.answerTimeLimit, end);
-                timerBar.x = (Main.instance.baseWindowSize.x - timerBar.width) / 2;
-                timerBar.y = (Main.instance.baseWindowSize.y - timerBar.height) / 2;
-            } else {
-                new_number();
+        if (!stop) {
+            if (number.visible && time >= Settings.numberDisplayTime) {
+                time = 0.;
+                number.visible = false;
+            } else if (!number.visible && time >= 0.08) {
+                time = 0.;
+                number.visible = true;
+                if (shownNumbers == Settings.displayedNumberCount) {
+                    stop = true;
+                    number.text = "";
+                    timerBar = new TimerBar(this, 800, 60, Settings.answerTimeLimit, end);
+                    timerBar.x = (Main.instance.baseWindowSize.x - timerBar.width) / 2;
+                    timerBar.y = (Main.instance.baseWindowSize.y - timerBar.height) / 2;
+                } else {
+                    new_number();
+                }
             }
         }
 
@@ -90,6 +104,8 @@ class GameScene extends Scene {
         number.x = (Main.instance.baseWindowSize.x - number.textWidth * number.scaleX) / 2;
         number.y = (Main.instance.baseWindowSize.y - number.textHeight * number.scaleY) / 2;
 
+        hxd.Res.number.play(false, 0.5);
+
         #if debug
         trace(rnumber);
         #end
@@ -100,7 +116,7 @@ class GameScene extends Scene {
         timerBar = null;
 
         var rt = Main.instance.addText(this, "Result:");
-        rt.scale(2);
+        rt.scale(2.5);
         rt.x = (Main.instance.baseWindowSize.x - rt.textWidth * rt.scaleX) / 2;
         rt.y = (Main.instance.baseWindowSize.y - rt.textHeight * rt.scaleY) / 8;
 

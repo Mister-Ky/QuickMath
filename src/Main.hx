@@ -10,7 +10,6 @@ class Main extends BaseApp {
     
     override function init() {
         super.init();
-        Main.instance = this;
         SceneManager.changeScene(new MenuScene());
     }
 
@@ -29,6 +28,6 @@ class Main extends BaseApp {
 
     static function main() {
         hxd.Res.initEmbed();
-        new Main();
+        instance = new Main();
     }
 }

@@ -58,4 +58,10 @@ class BaseApp extends hxd.App {
         tf.text = text;
         return tf;
     }
+
+    public function addOutlinedText( parent : h2d.Object, text = "" ) {
+        var tf = new msdf.OutlinedText(font, parent);
+        tf.text = text;
+        return tf;
+    }
 }

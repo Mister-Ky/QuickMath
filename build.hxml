@@ -1,13 +1,50 @@
 
+### Flags
+
 #-D debug
+
+## Window Settings
 -D windowSize=960x540
 -D windowTitle=Quick Math
 
+#--------------------------------------------------------------------------------
+
+### Paths
+
+## Source code directory
 -cp src
+## Path to resource files
 -D resourcesPath=data
 
--lib heaps
--lib hlsdl
+#--------------------------------------------------------------------------------
 
--hl bin/QuickMath.hl
+### Libraries
+
+## Heaps engine
+-lib heaps
+
+#--------------------------------------------------------------------------------
+
+### Graphics
+## (uncomment one to build for native targets; comment all for JavaScript)
+
+## SDL Backend (for cross-platform native builds)
+#-lib hlsdl
+
+## DirectX Backend (for Windows native builds)
+#-lib hldx
+
+#--------------------------------------------------------------------------------
+
+### Compile
+
+## HashLink Target
+#-hl QuickMath.hl
+
+## JavaScript Target
+-js QuickMath.js
+
+#--------------------------------------------------------------------------------
+
+## Main class
 -main Main
