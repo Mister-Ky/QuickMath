@@ -1,0 +1,13 @@
+
+#-D debug
+-D windowSize=960x540
+-D windowTitle=Quick Math
+
+-cp src
+-D resourcesPath=data
+
+-lib heaps
+-lib hlsdl
+
+-hl bin/QuickMath.hl
+-main Main
