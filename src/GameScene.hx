@@ -7,9 +7,9 @@ class GameScene extends Scene {
     var stop = false;
 
     var preGameCountdown = 3;
-    var readyText : msdf.OutlinedText;
     var countdownText : msdf.OutlinedText;
 
+    var status : msdf.OutlinedText;
     var number : h2d.Text;
     var timerBar : TimerBar;
 
@@ -18,18 +18,18 @@ class GameScene extends Scene {
         trace("----------------------------------------"); //40
         #end
 
-        readyText = Main.instance.addOutlinedText(this, "Ready");
-        readyText.scale(2.5);
-        readyText.textColor = 0x114E0D;
-        readyText.x = (Main.instance.baseWindowSize.x - readyText.textWidth * readyText.scaleX) / 2;
-        readyText.y = (Main.instance.baseWindowSize.y - readyText.textHeight * readyText.scaleY) / 8;
-        countdownText = Main.instance.addOutlinedText(this);
+        status = Main.app.addOutlinedText(this, "Ready");
+        status.scale(3);
+        status.textColor = 0x114E0D;
+        status.x = (Main.app.baseWindowSize.x - status.textWidth * status.scaleX) / 2;
+        status.y = (Main.app.baseWindowSize.y - status.textHeight * status.scaleY) / 10;
+        countdownText = Main.app.addOutlinedText(this);
         countdownText.scale(10);
         countdownText.textColor = 0x0131FF;
         countdownText.text = Std.string(preGameCountdown);
-        countdownText.x = (Main.instance.baseWindowSize.x - countdownText.textWidth * countdownText.scaleX) / 2;
-        countdownText.y = (Main.instance.baseWindowSize.y - countdownText.textHeight * countdownText.scaleY) / 2;
-        for (tf in [readyText, countdownText]) {
+        countdownText.x = (Main.app.baseWindowSize.x - countdownText.textWidth * countdownText.scaleX) / 2;
+        countdownText.y = (Main.app.baseWindowSize.y - countdownText.textHeight * countdownText.scaleY) / 2;
+        for (tf in [status, countdownText]) {
             tf.outlineColor = 0xFFFFFF;
             tf.thickness = 0.5;
             tf.smoothness = 0;
@@ -38,7 +38,7 @@ class GameScene extends Scene {
             tf.outlineSmoothness = 0;
         }
 
-        number = Main.instance.addText(this);
+        number = Main.app.addText(this);
         number.scale(10);
         number.textColor = 0x3CD302;
     }
@@ -54,15 +54,14 @@ class GameScene extends Scene {
                 time = 0.;
                 preGameCountdown--;
                 if (preGameCountdown == 0) {
-                    readyText.remove();
-                    readyText = null;
+                    status.text = "";
                     countdownText.remove();
                     countdownText = null;
                     new_number();
                 } else {
                     countdownText.text = Std.string(preGameCountdown);
-                    countdownText.x = (Main.instance.baseWindowSize.x - countdownText.textWidth * countdownText.scaleX) / 2;
-                    countdownText.y = (Main.instance.baseWindowSize.y - countdownText.textHeight * countdownText.scaleY) / 2;
+                    countdownText.x = (Main.app.baseWindowSize.x - countdownText.textWidth * countdownText.scaleX) / 2;
+                    countdownText.y = (Main.app.baseWindowSize.y - countdownText.textHeight * countdownText.scaleY) / 2;
                 }
             }
             return;
@@ -79,8 +78,8 @@ class GameScene extends Scene {
                     stop = true;
                     number.text = "";
                     timerBar = new TimerBar(this, 800, 60, Settings.answerTimeLimit, end);
-                    timerBar.x = (Main.instance.baseWindowSize.x - timerBar.width) / 2;
-                    timerBar.y = (Main.instance.baseWindowSize.y - timerBar.height) / 2;
+                    timerBar.x = (Main.app.baseWindowSize.x - timerBar.width) / 2;
+                    timerBar.y = (Main.app.baseWindowSize.y - timerBar.height) / 2;
                 } else {
                     new_number();
                 }
@@ -101,8 +100,8 @@ class GameScene extends Scene {
         number.text = Std.string(rnumber);
         shownNumbers++;
 
-        number.x = (Main.instance.baseWindowSize.x - number.textWidth * number.scaleX) / 2;
-        number.y = (Main.instance.baseWindowSize.y - number.textHeight * number.scaleY) / 2;
+        number.x = (Main.app.baseWindowSize.x - number.textWidth * number.scaleX) / 2;
+        number.y = (Main.app.baseWindowSize.y - number.textHeight * number.scaleY) / 2;
 
         hxd.Res.number.play(false, 0.5);
 
@@ -115,18 +114,17 @@ class GameScene extends Scene {
         timerBar.remove();
         timerBar = null;
 
-        var rt = Main.instance.addText(this, "Result:");
-        rt.scale(2.5);
-        rt.x = (Main.instance.baseWindowSize.x - rt.textWidth * rt.scaleX) / 2;
-        rt.y = (Main.instance.baseWindowSize.y - rt.textHeight * rt.scaleY) / 8;
+        status.text = "Result:";
+        status.x = (Main.app.baseWindowSize.x - status.textWidth * status.scaleX) / 2;
+        status.y = (Main.app.baseWindowSize.y - status.textHeight * status.scaleY) / 10;
 
         for (i in numbers) {
             result += i;
         }
         number.text = Std.string(result);
 
-        number.x = (Main.instance.baseWindowSize.x - number.textWidth * number.scaleX) / 2;
-        number.y = (Main.instance.baseWindowSize.y - number.textHeight * number.scaleY) / 2;
+        number.x = (Main.app.baseWindowSize.x - number.textWidth * number.scaleX) / 2;
+        number.y = (Main.app.baseWindowSize.y - number.textHeight * number.scaleY) / 2;
         
         #if debug
         trace("Result: " + result);

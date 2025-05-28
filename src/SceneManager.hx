@@ -4,7 +4,7 @@ class SceneManager {
 
     public static function changeScene(newScene : Scene) : Void {
         current = newScene;
-        Main.instance.setScene(current);
+        Main.app.setScene(current);
     }
 
     public static function update(dt : Float) : Void {

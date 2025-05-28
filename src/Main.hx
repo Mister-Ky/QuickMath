@@ -2,11 +2,10 @@
 //звуки
 //качество цифр
 //выравнить цифры в числе
-//обводка
 //оптимизация
 
 class Main extends BaseApp {
-    public static var instance : Main;
+    public static var app : Main;
     
     override function init() {
         super.init();
@@ -28,6 +27,6 @@ class Main extends BaseApp {
 
     static function main() {
         hxd.Res.initEmbed();
-        instance = new Main();
+        app = new Main();
     }
 }
