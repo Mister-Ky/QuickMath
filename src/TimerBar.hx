@@ -46,6 +46,13 @@ class TimerBar extends Object {
         bar.beginFill(0x0000FF);
         bar.drawRect(0, 0, currentWidth, height);
         bar.endFill();
+
+        var borderOffset = 5;
+        bar.lineStyle(5, 0xFFFFFF);
+        bar.moveTo(0, -borderOffset);
+        bar.lineTo(0, height + borderOffset);
+        bar.moveTo(width, -borderOffset);
+        bar.lineTo(width, height + borderOffset);
     }
 
     public function reset() : Void {
