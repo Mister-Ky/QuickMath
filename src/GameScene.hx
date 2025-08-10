@@ -103,7 +103,7 @@ class GameScene extends Scene {
         number.x = (Main.app.baseWindowSize.x - number.textWidth * number.scaleX) / 2;
         number.y = (Main.app.baseWindowSize.y - number.textHeight * number.scaleY) / 2;
 
-        hxd.Res.number.play(false, 0.5);
+        hxd.Res.number.play();
 
         #if debug
         trace(rnumber);
@@ -126,6 +126,8 @@ class GameScene extends Scene {
         number.x = (Main.app.baseWindowSize.x - number.textWidth * number.scaleX) / 2;
         number.y = (Main.app.baseWindowSize.y - number.textHeight * number.scaleY) / 2;
         
+        hxd.Res.endtimer.play();
+
         #if debug
         trace("Result: " + result);
         #end

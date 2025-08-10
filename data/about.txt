@@ -1,0 +1,21 @@
+Developed by
+Mister KygecHik3524
+
+License: MIT License
+(c) 2025 Mister KygecHik3524
+See LICENSE.txt for full license text.
+
+----------
+
+Audio from Freesound.org:
+"endtimer.wav (vOpt Box.wav)" - JFRecords (CC BY 3.0)
+https://creativecommons.org/licenses/by/3.0/
+
+----------
+
+Font:
+This project uses a font licensed under the SIL Open Font License, Version 1.1.
+Copyright (c) 2011, Jorge de Buen
+Copyright (c) 2011, Igino Marini (www.ikern.com | mail@iginomarini.com)
+Copyright (c) 2011–2015, Omnibus-Type (www.omnibus-type.com | omnibus.type@gmail.com)
+See OFL.txt for full license text.
