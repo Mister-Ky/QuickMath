@@ -9,7 +9,7 @@ class MenuScene extends Scene {
     var curve_debug : CurveDebugger;
     #end
 
-    override public function init() {
+    override function init() {
         curve = new Curve();
         curve.addPoint(0, 1);
         curve.addPoint(1.5, 2);
@@ -23,6 +23,7 @@ class MenuScene extends Scene {
         buttons.layout = h2d.Flow.FlowLayout.Vertical;
         buttons.verticalSpacing = 12;
         Main.app.addButton(buttons, "Start", () -> SceneManager.changeScene(new GameScene()));
+        Main.app.addButton(buttons, "About", () -> SceneManager.changeScene(new AboutScene()));
         #if hl
         Main.app.addButton(buttons, "Exit", () -> Sys.exit(0));
         #end

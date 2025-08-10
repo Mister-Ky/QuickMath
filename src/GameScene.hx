@@ -13,7 +13,7 @@ class GameScene extends Scene {
     var number : h2d.Text;
     var timerBar : TimerBar;
 
-    override public function init() {
+    override function init() {
         #if debug
         trace("----------------------------------------"); //40
         #end
